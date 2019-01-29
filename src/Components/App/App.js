@@ -8,13 +8,12 @@ import Playlist from '../Playlist/Playlist';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {searchResults: []
-  /*    {
+    this.state = {searchResults: [{
       id: '1234',
       name: 'Won\'t Get Fooled Again',
       album: 'Who\'s Next',
       artist: 'The Who'
-    } */
+    }]
   };
 
     this.state = {playlistName: 'My playlist'};
