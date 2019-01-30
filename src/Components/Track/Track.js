@@ -5,17 +5,23 @@ class Track extends Component {
   constructor(props) {
     super(props);
     this.state = {isRemoval: false};
-    this.state.renderAction = this.state.renderAction.bind(this);
-    this.addTrack = this.addTrack(this);
-    this.removeTrack = this.removeTrack(this);
+    this.renderAction = this.renderAction.bind(this);
+    this.handleAddTrack = this.handleAddTrack.bind(this);
+    this.handleRemoveTrack = this.handleRemoveTrack.bind(this);
   }
 
-  addTrack(track) {
+  handleAddTrack() {
     this.props.onAdd(this.props.track);
   }
 
-  removeTrack(track) {
+  handleRemoveTrack() {
     this.props.onRemove(this.props.track);
+  }
+
+  renderAction() {
+    return (this.props.isRemoval) ?
+      <a className="Track-action" onClick={ this.handleRemoveTrack }>-</a> :
+      <a className="Track-action" onClick={ this.handleAddTrack }>+</a>
   }
 
   render() {
@@ -25,18 +31,9 @@ class Track extends Component {
           <h3>{ this.props.track.name }</h3>
           <p>{ this.props.track.artist } | { this.props.track.album }</p>
         </div>
-          {this.state.isRemoval ? (
-            <a className="Track-action" onClick={ this.removeTrack } >{ this.renderAction() }</a>
-          ) : (
-            <a className="Track-action" onClick={ this.addTrack } >{ this.renderAction() }</a>
-          )}
+        {this.renderAction()}
       </div>
     )
-  }
-
-  renderAction() {
-    const removalState = this.state.isRemoval ? '+' : '-';
-    return removalState;
   }
 }
 
