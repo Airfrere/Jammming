@@ -12,9 +12,9 @@ class App extends Component {
     this.state = {
       searchResults: [{
         id: '1234',
-        name: 'Won\'t Get Fooled Again',
-        album: 'Who\'s Next',
-        artist: 'The Who'
+        name: 'Under Pressure',
+        album: 'Best of Queen',
+        artist: 'Queen feat. David Bowie'
       }, {
         id: '2345',
         name: 'Running On Empty',
@@ -31,6 +31,8 @@ class App extends Component {
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
+    this.search = this.search.bind(this);
   }
 
   addTrack(track) {
@@ -55,12 +57,20 @@ class App extends Component {
     this.setState( { playlistName : name });
   }
 
-// This should go after <div className="App">  <!-- Add a SearchBar component -->
+  savePlaylist() {
+
+  }
+
+  search(searchTerm) {
+    console.log(searchTerm);
+  }
+
   render() {
     return (
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
           <div className="App">
+            <SearchBar onSearch={ this.search } />
             <div className="App-playlist">
               <SearchResults searchResults={ this.state.searchResults } onAdd={ this.addTrack } />
               <Playlist
@@ -68,6 +78,7 @@ class App extends Component {
                 playlistTracks={ this.state.playlistTracks }
                 onRemove={ this.removeTrack }
                 onNameChange={ this.updatePlaylistName }
+                onSave={ this.savePlaylist }
               />
             </div>
           </div>
