@@ -5,6 +5,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 import Track from '../Track/Track';
+import Spotify from '../../util/Spotify';
 
 class App extends Component {
   constructor (props) {
@@ -21,7 +22,7 @@ class App extends Component {
         artist: 'Jackson Brown',
         album: 'The Best of Jackson Brown'
       }],
-      playlistName: 'My playlist',
+      playlistName: 'New playlist',
       playlistTracks: [{
         id: '1', name: 'Song1', album: 'Album1', artist: 'Artist1'}, {
         id: '2', name: 'Song2', album: 'Album2', artist: 'Artist2'
@@ -58,11 +59,14 @@ class App extends Component {
   }
 
   savePlaylist() {
-
+    Spotify.savePlaylist(this.state.playlistName, this.state.playlistTracks.id);
+    this.setState({playlistName : "New Playlist"});
+    this.setState({playlistTracks : []});
   }
 
   search(searchTerm) {
-    console.log(searchTerm);
+    const searchResult = Spotify.search(searchTerm);
+    this.setState({searchResults : searchResult});
   }
 
   render() {
