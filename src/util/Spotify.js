@@ -31,25 +31,17 @@ const Spotify = {
         {
           headers: {Authorization: `Bearer ${accessToken}`}
         }).then(response => {
-          if (response.ok) {
             return response.json();
-          }
-          throw new Error('Request failed!');
-        },
-          networkError => {
-            console.log(networkError.message);
-          }).then(jsonResponse => {
-            let trackArray = [];
+        }).then(jsonResponse => {
             if (jsonResponse.tracks.items) {
-              trackArray = jsonResponse.tracks.items.map(track => ({
+              return jsonResponse.tracks.items.map(track => ({
                 id : track.id,
                 name : track.name,
                 artist : track.artists[0].name,
                 album : track.album.name,
                 uri : track.uri
-              }))
+              }));
             }
-            return trackArray;
           })
     }
   }, // End of search

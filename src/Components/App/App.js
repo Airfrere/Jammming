@@ -11,22 +11,9 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      searchResults: [{
-        id: '1234',
-        name: 'Under Pressure',
-        album: 'Best of Queen',
-        artist: 'Queen feat. David Bowie'
-      }, {
-        id: '2345',
-        name: 'Running On Empty',
-        artist: 'Jackson Brown',
-        album: 'The Best of Jackson Brown'
-      }],
+      searchResults: [],
       playlistName: 'New playlist',
-      playlistTracks: [{
-        id: '1', name: 'Song1', album: 'Album1', artist: 'Artist1'}, {
-        id: '2', name: 'Song2', album: 'Album2', artist: 'Artist2'
-      }]
+      playlistTracks: []
     };
 
     this.addTrack = this.addTrack.bind(this);
@@ -65,10 +52,11 @@ class App extends Component {
   }
 
   search(searchTerm) {
-    const searchTracks = Spotify.search(searchTerm);
-console.log(searchTracks);
-    this.setState({searchResults : searchTracks});
-  }
+//    Spotify.search(searchTerm).then(searchTracks => {
+console.log(Spotify.search(searchTerm));
+//    this.setState({searchResults : searchTracks});
+//  });
+}
 
   render() {
     return (
