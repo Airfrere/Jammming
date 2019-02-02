@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
 import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
-// import Track from '../Track/Track';
 import Spotify from '../../util/Spotify';
 
 class App extends Component {
@@ -46,16 +44,20 @@ class App extends Component {
   }
 
   savePlaylist() {
-    Spotify.savePlaylist(this.state.playlistName, this.state.playlistTracks.id);
-    this.setState({playlistName : "New Playlist"});
-    this.setState({playlistTracks : []});
+    const playlistUris = this.state.playlistTracks.map(track => track.uri);
+    Spotify.savePlaylist(this.state.playlistName, playlistUris).then(response => {
+      if (response) {
+        this.updatePlaylistName('New Playlist');
+        this.setState({ playlistName: "New Playlist",
+          playlistTracks : [] });
+console.log(response + ' ' + this.state.playlistName + ' ' + this.state.playlistTracks);
+      }});
   }
 
   search(searchTerm) {
-//    Spotify.search(searchTerm).then(searchTracks => {
-console.log(Spotify.search(searchTerm));
-//    this.setState({searchResults : searchTracks});
-//  });
+    Spotify.search(searchTerm).then(searchTracks => {
+    this.setState({searchResults : searchTracks});
+  });
 }
 
   render() {
