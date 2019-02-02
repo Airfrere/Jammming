@@ -6,10 +6,12 @@ const redirectUri = 'http://soliloquy.surge.sh'
 // const redirectUri = 'http://localhost:3000/';
 
 const Spotify = {
+// Checks to see if an active access token exists and, if not, requests one from Spotify
   getAccessToken() {
     if (accessToken) {
       return accessToken;
     } else {
+// Extracts the access token from the URL returned by Spotify
       if(window.location.href.match(/access_token=([^&]*)/) && window.location.href.match(/expires_in=([^&]*)/)) {
         accessToken = window.location.href.match(/access_token=([^&]*)/)[1];
         expiresIn = window.location.href.match(/expires_in=([^&]*)/)[1];
@@ -17,13 +19,15 @@ const Spotify = {
         window.history.pushState('Access Token', null, '/');
         return accessToken;
       } else {
+// If there is no saved access token and one cannot be extracted from the URL,
+// request one from Spotify
         let url = `${authEndpoint}?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
         window.location = url;
       }
     }
-  },
+  }, // End of getAccessToken
 
-  // search takes the term passed from the search function in App,
+  // Takes the term passed from the search function in App,
   // searches for that title, artist or album on Spotify and returns the results.
   search(searchTerm) {
     accessToken = this.getAccessToken();
@@ -45,7 +49,7 @@ const Spotify = {
         })
   }, // End of search
 
-  // savePlaylist creates a new playlist on Spotify with the name passed to it,
+  // Creates a new playlist on Spotify with the name passed to it,
   // then uploads the tracks into the new playlist.
   async savePlaylist(playlistName, trackUris) {
     if (!playlistName || !trackUris) {
@@ -58,7 +62,7 @@ const Spotify = {
     try {
 
 // This section retrieves the user ID from Spotify,
-// which is necessary for creating a new playlist
+// which will be used to create a new playlist
 
       let response = await fetch('https://api.spotify.com/v1/me', {
         headers: { Authorization: `Bearer ${accessToken}` }

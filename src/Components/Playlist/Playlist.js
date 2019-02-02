@@ -8,6 +8,7 @@ class Playlist extends Component {
     this.handleNameChange = this.handleNameChange.bind(this);
   }
 
+// Calls App.updatePlaylistName when user enters a new name
   handleNameChange(e) {
     this.props.onNameChange(e.target.value);
   }

@@ -9,6 +9,7 @@ class SearchBar extends Component {
     this.handleTermChange = this.handleTermChange.bind(this);
   }
 
+// Calls App.search to search Spotify
   search() {
     this.props.onSearch(this.state.term);
   }

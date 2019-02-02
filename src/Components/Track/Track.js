@@ -10,14 +10,18 @@ class Track extends Component {
     this.handleRemoveTrack = this.handleRemoveTrack.bind(this);
   }
 
+// Calls App.addTrack to move a track from the list of search results to the playlist
   handleAddTrack() {
     this.props.onAdd(this.props.track);
   }
 
+// Calls App.removeTrack to eliminate a track from the playlist
   handleRemoveTrack() {
     this.props.onRemove(this.props.track);
   }
 
+// Places a + next to tracks in the search results list and a - next to tracks in the playlist
+// and determines the action taken when user clicks + or -
   renderAction() {
     return (this.props.isRemoval) ?
       <a className="Track-action" onClick={ this.handleRemoveTrack }>-</a> :

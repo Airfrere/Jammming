@@ -21,28 +21,36 @@ class App extends Component {
     this.search = this.search.bind(this);
   }
 
+// Called from SearchResults < Tracklist < Track.renderAction
+// Adds a track from the search results to the playlist
+// when user clicks + unless it already exists there
   addTrack(track) {
-    const alreadyInPlaylist = this.state.playlistTracks.some(function (el) {
+    const alreadyInPlaylist = this.state.playlistTracks.some((el) => {
       return el.id === track.id;
     });
     if (!alreadyInPlaylist) {
-      const newPlaylist = this.state.playlistTracks;
-      newPlaylist.push(track);
+      const newPlaylist = this.state.playlistTracks.concat(track);
       this.setState({ playlistTracks : newPlaylist });
     }
   }
 
+// Called from Playlist < Tracklist < Track.renderAction
+// Removes a track from Jammming's playlist when user clicks -
   removeTrack(track) {
-    const newPlaylist = this.state.playlistTracks.filter(function (el) {
+    const newPlaylist = this.state.playlistTracks.filter((el) => {
       return el.id !== track.id;
     })
     this.setState({ playlistTracks : newPlaylist });
   }
 
+// Called from Playlist.handleNameChange
+// Saves the new playlist name entered by user
   updatePlaylistName(name) {
     this.setState( { playlistName : name });
   }
 
+// Called from Playlist.render
+// Saves the playlist from Jammming to user's account on Spotify
   savePlaylist() {
     const playlistUris = this.state.playlistTracks.map(track => track.uri);
     Spotify.savePlaylist(this.state.playlistName, playlistUris).then(response => {
@@ -52,6 +60,8 @@ class App extends Component {
       }});
   }
 
+// Called from SearchBar.search
+// Searches Spotify for albums, artists and songs matching the term entered by user
   search(searchTerm) {
     Spotify.search(searchTerm).then(searchTracks => {
     this.setState({searchResults : searchTracks});
