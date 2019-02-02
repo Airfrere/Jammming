@@ -2,7 +2,8 @@ let accessToken;
 let expiresIn;
 const clientId = 'a32bfe6cd27848ca8bf8741b147cc33e';
 const authEndpoint = 'https://accounts.spotify.com/authorize';
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'http://soliloquy.surge.sh'
+// const redirectUri = 'http://localhost:3000/';
 
 const Spotify = {
   getAccessToken() {
@@ -63,7 +64,7 @@ const Spotify = {
         headers: { Authorization: `Bearer ${accessToken}` }
       });
       if (!response.ok) {
-        console.log('There was a problem retrieving your user ID.');
+        alert('There was a problem retrieving your user ID.');
         return;
       }
       let jsonResponse = await response.json();
@@ -83,7 +84,7 @@ const Spotify = {
         })
       });
       if (!nameResponse.ok) {
-        console.log('There was a problem posting the playlist name.');
+        alert('There was a problem posting the playlist name.');
         return;
       }
       jsonResponse = await nameResponse.json();
@@ -101,7 +102,7 @@ const Spotify = {
         body: JSON.stringify({uris: trackUris})
       });
       if (!tracksResponse.ok) {
-        console.log('There was a problem posting the playlist tracks.');
+        alert('There was a problem posting the playlist tracks.');
         return;
       }
     } // End of try
