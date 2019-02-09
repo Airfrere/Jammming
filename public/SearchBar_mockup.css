@@ -1,0 +1,48 @@
+
+label {
+  margin-right: 0px;
+  margin-left: -30px;
+  line-height: 16px;
+}
+
+input {
+  border-radius: 100%;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid #999;
+  transition: 0.2s all linear;
+  outline: none;
+  margin-right: 0px;
+
+  position: relative;
+  top: 4px;
+}
+
+input:checked {
+  border: 10px solid black;
+}
+
+input[type="radio"] {
+  width: 100px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+legend {
+  padding: 0px 10px;
+  border-radius: 0;
+  border: 0;
+  font-size: 14px;
+}
+
+button:hover,
+button:focus {
+  color: #999;
+}
+
+button:active {
+  background-color: white;
+  color: black;
+  outline: 1px solid black;
+}

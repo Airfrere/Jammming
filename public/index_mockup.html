@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link href="%PUBLIC_URL%/reset.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,500,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600" rel="stylesheet">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <title>Jammming</title>
+  </head>
+  <body>
+  <link href="../src/Components/App/App.css" rel="stylesheet">
+  <link href="../src/Components/SearchBar/SearchBar.css" rel="stylesheet">
+  <div>
+    <h1>Ja<span class="highlight">mmm</span>ing</h1>
+      <div class="App">
+        <div class="SearchBar">
+          <input placeholder="Enter A Song, Album, or Artist" onChange={ this.handleTermChange } />
+          <div>
+            <link href="./SearchBar_mockup.css" rel="stylesheet">
+            <legend>Filter search results by:</legend>
+            <input type="radio" id="album" name="filter" value="album"><label for="album">Album</label>
+            <input type="radio" id="artist" name="filter" value="artist"><label for="artist">Artist</label>
+            <input type="radio" id="track" name="filter" value="track"><label for="track">Track</label>
+            <input type="radio" id="none" name="filter" value="none" checked><label for="all">None</label>
+          </div>
+          <a onClick={this.search}>SEARCH</a>
+        </div>
+        <div class="App-playlist">
+          <SearchResults searchResults={ this.state.searchResults } onAdd={ this.addTrack } />
+          <Playlist
+            playlistName={ this.state.playlistName }
+            playlistTracks={ this.state.playlistTracks }
+            onRemove={ this.removeTrack }
+            onNameChange={ this.updatePlaylistName }
+            onSave={ this.savePlaylist }
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
